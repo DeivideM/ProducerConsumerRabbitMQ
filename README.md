@@ -1,4 +1,4 @@
-# ProducerConsumerRabbitMQ
+# Producer Consumer RabbitMQ
 Small app just showing how to send a message and how to consume it thru RabbitMQ
 
 This is a console app c# .net core 3.1 using RabbitMQ 3.8.4 (Windows 10 and Visual Studio 2019 Community)
