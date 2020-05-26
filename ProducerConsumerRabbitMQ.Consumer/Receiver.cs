@@ -21,9 +21,21 @@ namespace ProducerConsumerRabbitMQ.Consumer
 
                 consumer.Received += (model, ea) =>
                 {
-                    var body = ea.Body.Span;
-                    var message = Encoding.UTF8.GetString(body);
+                    var body = ea.Body; 
+                    var message = Encoding.UTF8.GetString(body.Span); //Please check if you can use only body. For this new RabbitMQ version it was required to use body.Span
                     Console.WriteLine($"Received message {message}");
+
+                    /*
+                    cannot convert from 'system.readonlymemory byte' to 'byte'
+                    Workaround
+                    var body = ea.Body.ToArray();
+                    var message = Encoding.UTF8.GetString(body);
+
+                    Better Solution
+                    var body = ea.Body; //ea.Body is of Type ReadOnlyMemory<byte>
+                    var message = Encoding.UTF8.GetString(body.Span);
+                    */
+
                 };
 
                 channel.BasicConsume(queue, true, consumer);
